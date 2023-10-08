@@ -1,0 +1,212 @@
+%----------------------- Преамбула -----------------------
+\documentclass[ut8x, 14pt, oneside, a4paper]{extarticle}
+
+\usepackage{extsizes} % Для добавления в параметры класса документа 14pt
+
+% Для работы с несколькими языками и шрифтом Times New Roman по-умолчанию
+\usepackage[english,russian]{babel}
+
+
+% ГОСТовские настройки для полей и абзацев
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage[left=30mm,right=10mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{misccorr}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\setlength{\parindent}{1.25cm}
+%\setlength{\parskip}{1em} % поменять
+%\linespread{1.3}
+\renewcommand{\baselinestretch}{1.5}
+\setlist{nolistsep} % Отсутствие отступов между элементами \enumerate и \itemize
+
+% Дополнительное окружения для подписей
+\usepackage{array}
+\newenvironment{signstabular}[1][1]{
+	\renewcommand*{\arraystretch}{#1}
+	\tabular
+}{
+	\endtabular
+}
+
+
+% Переопределение стандартных \section, \subsection, \subsubsection по ГОСТу;
+% Переопределение их отступов до и после для 1.5 интервала во всем документе
+\usepackage{titlesec}
+
+
+
+\titleformat{\section}[block]
+{\bfseries\normalsize\filcenter}{\thesection}{1em}{}
+
+\titleformat{\subsection}[hang]
+{\bfseries\normalsize}{\thesubsection}{1em}{}
+\titlespacing\subsection{\parindent}{\parskip}{\parskip}
+
+\titleformat{\subsubsection}[hang]
+{\bfseries\normalsize}{\thesubsubsection}{1em}{}
+\titlespacing\subsubsection{\parindent}{\parskip}{\parskip}
+
+
+% Работа с изображениями и таблицами; переопределение названий по ГОСТу
+\usepackage{caption}
+\captionsetup[figure]{name={Рисунок},labelsep=endash}
+\captionsetup[table]{singlelinecheck=false, labelsep=endash}
+
+\usepackage{graphicx}
+\usepackage{inc/slashbox} % Диагональное разделение первой ячейки в таблицах
+
+% Цвета для гиперссылок и листингов
+\usepackage{color}
+
+% Гиперссылки \toc с кликабельностью
+\usepackage{hyperref}
+
+\hypersetup{
+	linktoc=all,
+	linkcolor=black,
+	colorlinks=true,
+	urlcolor=black,
+}
+
+
+
+\usepackage{color} % Цвета для гиперссылок и листингов
+%\definecolor{comment}{rgb}{0,0.5,0}
+%\definecolor{plain}{rgb}{0.2,0.2,0.2}
+%\definecolor{string}{rgb}{0.91,0.45,0.32}
+%\hypersetup{citecolor=blue}
+\hypersetup{citecolor=black}
+
+\usepackage{listings}
+\lstset{
+	language=python, % выбор языка для подсветки
+	basicstyle=\footnotesize\ttfamily,
+	%numberstyle=, % размер шрифта для номеров строк
+	stepnumber=1, % размер шага между двумя номерами строк
+	numbersep=5pt, % как далеко отстоят номера строк от подсвечиваемого кода
+	frame=single, % рисовать рамку вокруг кода
+	tabsize=2, % размер табуляции по умолчанию равен 4 пробелам
+	captionpos=t, % позиция заголовка вверху [t] или внизу [b]
+	breaklines=true,
+	breakatwhitespace=true, % переносить строки только если есть пробел
+	backgroundcolor=\color{white},
+	keywordstyle=\color{blue}
+}
+
+
+\usepackage{ulem} % Нормальное нижнее подчеркивание
+\usepackage{hhline} % Двойная горизонтальная линия в таблицах
+\usepackage[figure,table]{totalcount} % Подсчет изображений, таблиц
+\usepackage{rotating} % Поворот изображения вместе с названием
+\usepackage{lastpage} % Для подсчета числа страниц
+
+
+
+\usepackage{color}
+
+
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+{\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{14mm}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+	{3.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage{xparse}
+
+
+\NewDocumentCommand{\codeword}{v}{%
+	\texttt{\textcolor{black}{#1}}%
+}
+% \lstset{language=C++,
+%                 % basicstyle=\bfseries,
+%                 keywordstyle=\bfseries \color{blue},
+%                 stringstyle=\bfseries \color{red},
+%                 commentstyle=\bfseries \color{green},
+%                 morecomment=[l][\color{magenta}]{\#}
+% }
+% \lstset{language=C,keywordstyle={\bfseries \color{black}}}
+\captionsetup{labelsep=endash}
+\usepackage[final]{pdfpages}
+
+\usepackage{placeins}
+\usepackage{listings}
+\definecolor{CPPLight}  {HTML} {686868}
+\definecolor{CPPSteel}  {HTML} {888888}
+\definecolor{CPPDark}   {HTML} {262626}
+\definecolor{CPPBlue}   {HTML} {4172A3}
+\definecolor{CPPGreen}  {HTML} {487818}
+\definecolor{CPPBrown}  {HTML} {A07040}
+\definecolor{CPPRed}    {HTML} {AD4D3A}
+\definecolor{CPPViolet} {HTML} {7040A0}
+\definecolor{CPPGray}  {HTML} {B8B8B8}
+\lstset{
+    columns=fixed,       
+    numbers=left,                                        
+    % frame=none,                                          
+    backgroundcolor=\color[RGB]{245,245,244},            
+    keywordstyle=\color[RGB]{40,40,255},                 
+    numberstyle=\footnotesize\color{darkgray},           
+    commentstyle=\it\color[RGB]{0,96,96},                
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   
+    showstringspaces=false,                              
+    language=C++,                                        
+    morekeywords={alignas,continute,friend,register,true,alignof,decltype,goto,
+    reinterpret_cast,try,asm,defult,if,return,typedef,auto,delete,inline,short,
+    typeid,bool,do,int,signed,typename,break,double,long,sizeof,union,case,
+    dynamic_cast,mutable,static,unsigned,catch,else,namespace,static_assert,using,
+    char,enum,new,static_cast,virtual,char16_t,char32_t,explict,noexcept,struct,
+    void,export,nullptr,switch,volatile,class,extern,operator,template,wchar_t,
+    const,false,private,this,while,constexpr,float,protected,thread_local,
+    const_cast,for,public,throw,std},
+    emph={map,set,multimap,multiset,unordered_map,unordered_set,
+    unordered_multiset,unordered_multimap,vector,string,list,deque,
+    array,stack,forwared_list,iostream,memory,shared_ptr,unique_ptr,
+    random,bitset,ostream,istream,cout,cin,endl,move,default_random_engine,
+    uniform_int_distribution,iterator,algorithm,functional,bing,numeric,},
+    emphstyle=\color{CPPViolet}, 
+}
+\usepackage{longtable}
+\usepackage{tikz}
+
+
+\usepackage{pgfplots}
+\usepackage{totcount}
+\newtotcounter{citnum} %From the package documentation
+
+\makeatletter
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+
+

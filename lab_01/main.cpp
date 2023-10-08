@@ -1,6 +1,7 @@
 #include "ArchiveReader.h"
 #include "Encoder.h"
 #include "Enigma.h"
+#include <fstream>
 
 int main()
 {
@@ -53,6 +54,11 @@ int main()
     Enigma enigma_two(alphabet_size, num_rotors, reflector, rotors, commutator);
     std::vector<uint8_t> decrypted_message = enigma_two.encrypt(encoder, new_message);
     std::cout << decrypted_message.data() << std::endl;
+
+    std::ofstream myfile;
+    myfile.open("output.txt");
+    myfile << new_message.data();
+    myfile.close();
 
     return 0;
 }

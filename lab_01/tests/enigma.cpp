@@ -56,3 +56,35 @@ TEST(Enigma, Decode)
 
     ASSERT_TRUE(enigma_decrypt.encrypt(encoder, enc_msg) == message);
 }
+
+TEST(Enigma, Encode_Empty)
+{
+    Encoder encoder = setup_encoder();
+    Enigma enigma = setup_enigma();
+    std::string new_message{""};
+    std::vector<uint8_t> message(new_message.begin(), new_message.end());
+
+    ASSERT_TRUE(enigma.encrypt(encoder, message) == message);
+}
+
+TEST(Enigma, Encode_One)
+{
+    Encoder encoder = setup_encoder();
+    Enigma enigma = setup_enigma();
+    std::string new_message{"test"};
+    std::vector<uint8_t> message(new_message.begin(), new_message.end());
+
+    ASSERT_FALSE(enigma.encrypt(encoder, message) == message);
+}
+
+TEST(Enigma, Decode_One)
+{
+    Encoder encoder = setup_encoder();
+    Enigma enigma_encrypt = setup_enigma();
+    Enigma enigma_decrypt = setup_enigma();
+    std::string new_message{"F"};
+    std::vector<uint8_t> message(new_message.begin(), new_message.end());
+    std::vector<uint8_t> enc_msg = enigma_encrypt.encrypt(encoder, message);
+
+    ASSERT_TRUE(enigma_decrypt.encrypt(encoder, enc_msg) == message);
+}

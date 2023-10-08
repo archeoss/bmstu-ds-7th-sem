@@ -1,0 +1,124 @@
+\section*{\large{ВВЕДЕНИЕ}}
+
+Цель лабораторной работы --- разработать программу шифровальной машины <<Энигма>> \cite{Enigma}.
+
+Задачи лабораторной работы:
+
+\begin{enumerate}
+    \item провести анализ работы шифровальной машина <<Энигма>>;
+    \item описать алгоритм шифрования;
+    \item релизовать описанный алгоритм.
+\end{enumerate}
+
+\clearpage
+\section{Аналитическая часть}
+
+Шифровальная машина <<Энигма>> состоит из трех основных частей:
+\begin{enumerate}
+    \item роторы --- диски обладающие 26 гранями, где каждая грань представляла собой нумерацию английского алфавита;
+    \item рефлектор --- статический механизм, позволящий машине также расшифровать текст;
+    \item коммутатор --- набор парных шифров.
+\end{enumerate}
+
+\subsection{Алгоритм работы машины}
+
+На вход <<Энигме>> подается строка, которая разбивается на символы. 
+Далее символ проходит через коммутационную панель, который меняет символ в соотвествии с настройкой.
+После прохождения панели, символ проходит черз три диска и попадает на рефлектор.
+После работы рефлектора, символ отправляется обратно на диске и оканчательно шифруется через коммутатор.
+Затем один ротор совершает оборот, если ротор обернулся 26 раз, то поворачивается следующий.
+
+
+\clearpage
+
+\section{Конструкторская часть}
+
+\subsection{Разработка алгоритма}
+
+На рисунке \ref{fig:alg} приведена схема работы шифровальной машины Энигма.
+
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=0.6\linewidth]{assets/graphs/enigma-algo.png}
+	\caption{Схема работы шифровальной машина Энигма}
+	\label{fig:alg}
+\end{figure}
+
+\clearpage
+
+\section{Технологическая часть}
+
+\subsection{Средства реализации}
+
+Для реализации ПО был выбран язык C++ \cite{c++}.
+В данном языке есть все требующиеся инструменты для данной лабораторной работы.
+В качестве среды разработки была выбрана среда NeoVim\cite{nvim}.
+
+\subsection{Реализация алгоритма}
+
+\begin{lstinputlisting}[
+        caption={\raggedright Реализация алгоритма Энигмы.},
+        label={lst:enigma},
+        language={C++},
+        linerange={38-65}
+    ]{../Enigma.cpp}
+\end{lstinputlisting}
+
+\begin{lstinputlisting}[
+        caption={\raggedright Реализация алгоритма Энигмы, продолжение.},
+        label={lst:enigma},
+        language={C++},
+        linerange={66-99}
+    ]{../Enigma.cpp}
+\end{lstinputlisting}
+
+
+\subsection{Тестовые данные}
+
+В таблице \ref{tbl:functional_test} приведены тесты, описанные в листинге \ref{lst:tests} для алгоритма шифрования Энигмы. 
+Применена методология черного ящика. Тесты пройдены \textit{успешно}.
+
+\begin{lstinputlisting}[
+        caption={\raggedright Реализация функциональных тестов.},
+        label={lst:tests},
+        language={C++},
+        linerange={38-69}
+    ]{../tests/enigma.cpp}
+\end{lstinputlisting}
+
+\clearpage
+
+\begin{lstinputlisting}[
+        caption={\raggedright Реализация функциональных тестов, продолжение.},
+        label={lst:tests},
+        language={C++},
+        linerange={70-90}
+    ]{../tests/enigma.cpp}
+\end{lstinputlisting}
+\begin{table}[ht!]
+	\begin{center}
+		\captionsetup{justification=raggedright,singlelinecheck=off}
+		\caption{\label{tbl:functional_test} Функциональные тесты}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Входная строка & Выходная строка \\ 
+			\hline
+			$TEST$ & $FGxKNR$\\
+			$FGxKNR$  & $TEST$\\
+			$$  & $$ \\
+            $F$ & $R$\\
+			$R$  & $F$\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\clearpage
+\section*{\large{ЗАКЛЮЧЕНИЕ}}
+В данной лабораторной работе:
+\begin{enumerate}
+    \item проведен анализ работы шифровальной машина <<Энигма>>;
+    \item описан алгоритм шифрования;
+    \item реализован описанный алгоритм;
+\end{enumerate}
