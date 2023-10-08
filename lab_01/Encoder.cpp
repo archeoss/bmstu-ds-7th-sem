@@ -1,10 +1,4 @@
 #include "Encoder.h"
-#include <cstddef>
-#include <cstdint>
-#include <iostream>
-#include <stdexcept>
-#include <string>
-#include <vector>
 
 Encoder::Encoder(uint8_t alphabet_size, std::string new_alphabet)
     : size_alpha{alphabet_size}

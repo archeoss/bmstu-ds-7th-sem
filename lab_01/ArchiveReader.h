@@ -1,5 +1,8 @@
-#include <cstdint>
-#include <string>
+#include "archive.h"
+#include "archive_entry.h"
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
 #include <vector>
 
 class ArchiveReader

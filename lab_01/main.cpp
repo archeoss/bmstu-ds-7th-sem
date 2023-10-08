@@ -1,23 +1,6 @@
 #include "ArchiveReader.h"
 #include "Encoder.h"
 #include "Enigma.h"
-#include <archive.h>
-#include <archive_entry.h>
-#include <cstddef>
-#include <cstdint>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <ctime>
-#include <fcntl.h>
-#include <fstream>
-#include <iostream>
-#include <ostream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <vector>
-#include <zlib.h>
 
 int main()
 {

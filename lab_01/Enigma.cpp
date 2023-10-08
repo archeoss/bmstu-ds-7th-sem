@@ -1,8 +1,5 @@
 #include "Enigma.h"
 #include "Encoder.h"
-#include <cstdint>
-#include <cstring>
-#include <iostream>
 
 Enigma::Enigma(uint8_t size_rotor,
                uint8_t num_rotors,

@@ -1,15 +1,4 @@
 #include "ArchiveReader.h"
-#include "archive.h"
-#include "archive_entry.h"
-#include <cstdint>
-#include <cstring>
-#include <fstream>
-#include <ios>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <system_error>
 
 ArchiveReader::ArchiveReader(std::string filename)
     : filename{filename}

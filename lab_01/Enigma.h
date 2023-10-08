@@ -2,12 +2,8 @@
 #define LAB_01_ENIGMA_H
 
 #include "Encoder.h"
-#include <cinttypes>
-#include <cstdint>
-#include <cstdio>
-#include <memory>
-#include <string>
-#include <vector>
+#include <iostream>
+#include <stdexcept>
 
 class Enigma
 {

@@ -2,6 +2,7 @@
 #define LAB_01_ENCODER_H
 
 #include <cstdint>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
