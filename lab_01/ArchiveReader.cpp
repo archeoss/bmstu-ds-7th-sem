@@ -1,4 +1,5 @@
 #include "ArchiveReader.h"
+#include <iostream>
 
 ArchiveReader::ArchiveReader(std::string filename)
     : filename{filename}
@@ -84,4 +85,5 @@ ArchiveAlphabet::ArchiveAlphabet()
     {
         alphabet.push_back(i);
     }
+    alphabet.push_back(255);
 }

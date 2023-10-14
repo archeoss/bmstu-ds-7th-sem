@@ -17,7 +17,9 @@ PCBC::PCBC(SymAlg* instance, const uint64_t iv)
     : algo(instance)
 {
     blocksize = algo->blocksize() >> 3;
-    const_IV = iv;
+    char key[8];
+    std::memcpy(key, &iv, 8);
+    const_IV = key;
 }
 
 std::string PCBC::encrypt(const std::string& data)

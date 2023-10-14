@@ -1,8 +1,8 @@
 #include "Enigma.h"
 #include "Encoder.h"
 
-Enigma::Enigma(uint8_t size_rotor,
-               uint8_t num_rotors,
+Enigma::Enigma(uint16_t size_rotor,
+               uint16_t num_rotors,
                const Reflector& reflector_place,
                const std::vector<Rotor>& rotors_place,
                const Commutator& commutator_place)

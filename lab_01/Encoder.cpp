@@ -1,6 +1,8 @@
 #include "Encoder.h"
+#include <iostream>
+#include <string>
 
-Encoder::Encoder(uint8_t alphabet_size, std::string new_alphabet)
+Encoder::Encoder(uint16_t alphabet_size, std::string new_alphabet)
     : size_alpha{alphabet_size}
 {
     for(int i = 0; i < size_alpha; i++)
@@ -9,7 +11,7 @@ Encoder::Encoder(uint8_t alphabet_size, std::string new_alphabet)
     }
 }
 
-Encoder::Encoder(uint8_t alphabet_size, std::vector<uint8_t> alphabet)
+Encoder::Encoder(uint16_t alphabet_size, std::vector<uint8_t> alphabet)
     : size_alpha{alphabet_size}
     , alphabet{alphabet} {};
 
@@ -27,7 +29,7 @@ uint8_t Encoder::encode(uint8_t symbol)
 
 uint8_t Encoder::decode(uint8_t code)
 {
-    if(code >= size_alpha)
+    if(code > size_alpha)
     {
         throw std::overflow_error("No symbol in decoder");
     }

@@ -20,7 +20,7 @@ std::string DES::run(const std::string& DATA)
     // IP
     for(uint8_t x = 0; x < 64; x++)
     {
-        temp += data[DES_IP[x] - 1];
+        temp += data[IP[x] - 1];
     }
     data = temp;
     for(uint8_t x = 0; x < 16; x++)
@@ -35,7 +35,7 @@ std::string DES::run(const std::string& DATA)
         temp = "";
         for(uint8_t y = 0; y < 48; y++)
         {
-            temp += right[DES_EX[y] - 1];
+            temp += right[EX[y] - 1];
         }
         t = toint(temp, 2);
 
@@ -55,14 +55,14 @@ std::string DES::run(const std::string& DATA)
             std::string s = "";
             s += RIGHT[y][0];
             s += RIGHT[y][5];
-            temp += makebin(DES_S_BOX[y][toint(s, 2)][toint(RIGHT[y].substr(1, 4), 2)], 4);
+            temp += makebin(S_BOX[y][toint(s, 2)][toint(RIGHT[y].substr(1, 4), 2)], 4);
         }
 
         // permutate
         right = "";
         for(uint8_t y = 0; y < 32; y++)
         {
-            right += temp[DES_P[y] - 1];
+            right += temp[P[y] - 1];
         }
 
         // right xor left and combine with old right
@@ -75,7 +75,7 @@ std::string DES::run(const std::string& DATA)
     uint64_t out = 0;
     for(uint8_t x = 0; x < 64; x++)
     {
-        out += static_cast<uint64_t>(data[DES_INVIP[x] - 1] == '1') << (63 - x);
+        out += static_cast<uint64_t>(data[INVIP[x] - 1] == '1') << (63 - x);
     }
     return unhexlify(makehex(out, 16));
 }
@@ -119,17 +119,17 @@ void DES::setkey(const std::string& KEY)
     std::string left = "", right = "";
     for(uint8_t x = 0; x < 28; x++)
     {
-        left += key[DES_PC1_l[x] - 1];
-        right += key[DES_PC1_r[x] - 1];
+        left += key[PC1_l[x] - 1];
+        right += key[PC1_r[x] - 1];
     }
 
     for(uint8_t x = 0; x < 16; x++)
     {
-        left = (left + left).substr(DES_rot[x], 28);
-        right = (right + right).substr(DES_rot[x], 28);
+        left = (left + left).substr(ROT[x], 28);
+        right = (right + right).substr(ROT[x], 28);
         std::string k = "";
         for(uint8_t y = 0; y < 48; y++)
-            k += (left + right)[DES_PC2[y] - 1];
+            k += (left + right)[PC2[y] - 1];
         keys[x] = toint(k, 2);
     }
 

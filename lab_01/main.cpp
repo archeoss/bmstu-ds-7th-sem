@@ -2,6 +2,7 @@
 #include "Encoder.h"
 #include "Enigma.h"
 #include <fstream>
+#include <string>
 
 int main()
 {
@@ -11,7 +12,9 @@ int main()
     // Setting up Encoder
     ArchiveAlphabet alphabet_arch = ArchiveAlphabet();
     int alphabet_size = alphabet_arch.alphabet.size();
-    Encoder encoder(alphabet_arch.alphabet.size(), alphabet_arch.alphabet);
+    std::cout << std::to_string(alphabet_size) << "\n" << std::endl;
+    // std::cout << symbol << std::endl;
+    Encoder encoder(alphabet_size, alphabet_arch.alphabet);
 
     // std::string alphabet_english = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz\n\t";
     // Encoder encoder(alphabet_english.size(), alphabet_english);
@@ -41,24 +44,36 @@ int main()
     // ArchiveReader arch_reader("input.tar.gz");
     // std::string archive_data = arch_reader.extract_into_memory("Enigma.h");
     ArchiveReader arch_reader("");
-    std::string archive_data = arch_reader.read_file_into_memory("input.txt");
+    std::string archive_data = arch_reader.read_file_into_memory("main.pdf");
 
-    std::cout << "Message: " << archive_data << std::endl;
+    std::cout << "Message: " << archive_data.size() << std::endl;
     std::vector<uint8_t> message(archive_data.begin(), archive_data.end());
-    std::cout << "Encrypted message: ";
+    // std::cout << "Encrypted message: ";
     Enigma enigma(alphabet_size, num_rotors, reflector, rotors, commutator);
     std::vector<uint8_t> new_message = enigma.encrypt(encoder, message);
-    std::cout << new_message.data() << std::endl;
+    std::cout << new_message.size() << std::endl;
 
-    std::cout << "Decrypted message: ";
+    std::ofstream encrypted_file;
+    encrypted_file.open("main.bin");
+    encrypted_file << new_message.data();
+    encrypted_file.close();
+
+    // std::string crypted_data = arch_reader.read_file_into_memory("main.bin");
+    // std::cout << "Decrypted message: ";
+    std::vector<uint8_t> crypted_message(new_message.begin(), new_message.end());
     Enigma enigma_two(alphabet_size, num_rotors, reflector, rotors, commutator);
-    std::vector<uint8_t> decrypted_message = enigma_two.encrypt(encoder, new_message);
-    std::cout << decrypted_message.data() << std::endl;
+    std::vector<uint8_t> decrypted_message = enigma_two.encrypt(encoder, crypted_message);
 
     std::ofstream myfile;
     myfile.open("output.txt");
     myfile << new_message.data();
     myfile.close();
+
+    std::string out_message(decrypted_message.begin(), decrypted_message.end());
+    std::ofstream decrypted_file;
+    decrypted_file.open("main_decr.pdf");
+    decrypted_file << out_message;
+    decrypted_file.close();
 
     return 0;
 }
