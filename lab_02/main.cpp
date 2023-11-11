@@ -17,26 +17,26 @@ int main()
     // ArchiveReader arch_reader("input.tar.gz");
     // std::string archive_data = arch_reader.extract_into_memory("input.txt");
     ArchiveReader arch_reader("");
-    std::string archive_data = arch_reader.read_file_into_memory("main.pdf");
+    // std::string archive_data = arch_reader.read_file_into_memory("DES-1.png");
+    // // //
+    // // std::cout << "Message: " << archive_data << std::endl;
+    // std::vector<uint8_t> message(archive_data.begin(), archive_data.end());
+    // // // std::cout << "Encrypted message: ";
+    // auto encrypted_data = pcbc.encrypt(archive_data);
+    // // // std::cout << encrypted_data << std::endl;
+    //
+    // std::ofstream encrypted_file;
+    // encrypted_file.open("des.bin");
+    // encrypted_file << encrypted_data;
+    // encrypted_file.close();
 
-    // std::cout << "Message: " << archive_data << std::endl;
-    std::vector<uint8_t> message(archive_data.begin(), archive_data.end());
-    // std::cout << "Encrypted message: ";
-    auto encrypted_data = pcbc.encrypt(archive_data);
-    // std::cout << encrypted_data << std::endl;
-
-    std::ofstream encrypted_file;
-    encrypted_file.open("main.bin");
-    encrypted_file << encrypted_data;
-    encrypted_file.close();
-
-    std::string crypted_data = arch_reader.read_file_into_memory("main.bin");
+    std::string crypted_data = arch_reader.read_file_into_memory("des_copy.bin");
     // std::cout << "Decrypted message: ";
     auto decrypted_data = pcbc.decrypt(crypted_data);
     // std::cout << decrypted_data << std::endl;
 
     std::ofstream decrypted_file;
-    decrypted_file.open("main_decr.pdf");
+    decrypted_file.open("DES_dec.png");
     decrypted_file << decrypted_data;
     decrypted_file.close();
 
